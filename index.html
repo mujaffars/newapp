@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap theme CSS -->
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        <link href="css/jumbotron-narrow.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="js/datepicker/css/redmond/jquery-ui-1.10.1.custom.min.css" />
+
+        <title><h5>Shramik Milk</h5></title>
+    </head>
+    <body onload="onLoad()">
+
+        <form id="loginForm">
+            <nav class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand navbarbrand" href="#">Shramik Milk</a>
+                        <a class="lnkLogOut hide fa fa-sign-out fa-head" href="#"></a>
+                        <a class="fa fa-refresh fa-head hide"></a>
+                    </div>
+                </div>
+            </nav>
+            <div class="cntainr">
+                <div class="">
+                    <div>
+
+                        <h4 style="text-align: center;">Date: 08-01-2017</h4>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home">DOC</a></li>
+                            <li><a data-toggle="tab" href="#menu1">Packing</a></li>
+                            <li><a data-toggle="tab" href="#menu2">BiProduct</a></li>
+                        </ul>
+                        <br/>
+                        <br/>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <table id="tblMilkCollection">
+                                    <tr>
+                                        <td>
+                                            <div class="divCollection">10000</div>
+                                        </td>
+                                        <td>
+                                            <div class="divCollection">4000</div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h4 style="text-align: center;">Total: 14000</h4>
+
+                                <table id="tblMilkCollection" class="table table-bordered table-striped">
+                                    <tr>
+                                        <td><h5>Total collection center wise as per above date</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Dhandarfal 900 ltr. 4 fat 8.4 snf</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Dhandarfal 900 ltr. 4 fat 8.4 snf</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Dhandarfal 900 ltr. 4 fat 8.4 snf</h6></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <table id="tblMilkCollection" class="table table-bordered table-striped">
+                                    <tr>
+                                        <td><h5>Item name</h5></td>
+                                        <td><h5>Create</h5></td>
+                                        <td><h5>Qty</h5></td>
+                                        <td><h5>Liter</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (1000 ML)</h6></td>
+                                        <td><h6>103</h6></td>
+                                        <td><h6>1030</h6></td>
+                                        <td><h6>1030</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (200 ML)</h6></td>
+                                        <td><h6>72</h6></td>
+                                        <td><h6>3600</h6></td>
+                                        <td><h6>720</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (250 ML)</h6></td>
+                                        <td><h6>424</h6></td>
+                                        <td><h6>16980</h6></td>
+                                        <td><h6>4245</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (500 ML)</h6></td>
+                                        <td><h6>819</h6></td>
+                                        <td><h6>16374</h6></td>
+                                        <td><h6>8187</h6></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="menu2" class="tab-pane fade">
+                                <table id="tblMilkCollection" class="table table-bordered table-striped">
+                                    <tr>
+                                        <td><h5>Item name</h5></td>
+                                        <td><h5>Create</h5></td>
+                                        <td><h5>Qty</h5></td>
+                                        <td><h5>Liter</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (1000 ML)</h6></td>
+                                        <td><h6>103</h6></td>
+                                        <td><h6>1030</h6></td>
+                                        <td><h6>1030</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (200 ML)</h6></td>
+                                        <td><h6>72</h6></td>
+                                        <td><h6>3600</h6></td>
+                                        <td><h6>720</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (250 ML)</h6></td>
+                                        <td><h6>424</h6></td>
+                                        <td><h6>16980</h6></td>
+                                        <td><h6>4245</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Toned milk (500 ML)</h6></td>
+                                        <td><h6>819</h6></td>
+                                        <td><h6>16374</h6></td>
+                                        <td><h6>8187</h6></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="latlongText" class="hide">
+
+            </div>
+            <div id="divCheckPin" class="hide">
+
+            </div>
+            <div id="divUserId" class="hide">
+
+            </div>
+        </form>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/datepicker/js/jquery-ui-1.10.1.custom.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/additional-methods.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+
+    </body>
+</html>
