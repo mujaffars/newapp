@@ -36,7 +36,7 @@
 
         <link rel="stylesheet" href="js/datepicker/css/redmond/jquery-ui-1.10.1.custom.min.css" />
 
-        <title><h5>Shramik Milk</h5></title>
+        <title>Shramik Milk</title>
     </head>
     <body onload="onLoad()">
 
@@ -54,18 +54,18 @@
                 <div class="">
                     <div>
 
-                        <h4 style="text-align: center;">Date: 08-01-2017</h4>
+                        <h4 style="text-align: center;">Date: <span class="dateToday"></span></h4>
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home">DOC</a></li>
-                            <li><a data-toggle="tab" href="#menu1">Packing</a></li>
-                            <li><a data-toggle="tab" href="#menu2">BiProduct</a></li>
+                            <li class="active"><a id="tab1" data-target="#home" data-toggle="tab" href="http://www.shivtraderssangli.com/MilkUnionApp.aspx?data=DOC&date=">DOC</a></li>
+                            <li><a id="tab2" data-target="#menu1" data-toggle="tab" href="http://www.shivtraderssangli.com/MilkUnionApp.aspx?data=MilkPacking&date=">Packing</a></li>
+                            <li><a id="tab3" data-target="#menu2" data-toggle="tab" href="http://www.shivtraderssangli.com/MilkUnionApp.aspx?data=MilkBIProduct&date=">BiProduct</a></li>
                         </ul>
                         <br/>
                         <br/>
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
-                                <table id="tblMilkCollection">
+<!--                                <table id="tblMilkCollection">
                                     <tr>
                                         <td>
                                             <div class="divCollection">10000</div>
@@ -91,11 +91,11 @@
                                     <tr>
                                         <td><h6>Dhandarfal 900 ltr. 4 fat 8.4 snf</h6></td>
                                     </tr>
-                                </table>
+                                </table>-->
 
                             </div>
                             <div id="menu1" class="tab-pane fade">
-                                <table id="tblMilkCollection" class="table table-bordered table-striped">
+<!--                                <table id="tblMilkCollection" class="table table-bordered table-striped">
                                     <tr>
                                         <td><h5>Item name</h5></td>
                                         <td><h5>Create</h5></td>
@@ -126,10 +126,10 @@
                                         <td><h6>16374</h6></td>
                                         <td><h6>8187</h6></td>
                                     </tr>
-                                </table>
+                                </table>-->
                             </div>
                             <div id="menu2" class="tab-pane fade">
-                                <table id="tblMilkCollection" class="table table-bordered table-striped">
+<!--                                <table id="tblMilkCollection" class="table table-bordered table-striped">
                                     <tr>
                                         <td><h5>Item name</h5></td>
                                         <td><h5>Create</h5></td>
@@ -160,7 +160,7 @@
                                         <td><h6>16374</h6></td>
                                         <td><h6>8187</h6></td>
                                     </tr>
-                                </table>
+                                </table>-->
                             </div>
                         </div>
 

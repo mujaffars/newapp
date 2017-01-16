@@ -5,10 +5,10 @@
     changeCss('h3', 'font-size:' + fontSize + 'px;');
     changeCss('h5', 'font-size:' + parseInt(eval(eval(screenWidth * 3.5) / 100)) + 'px;');
     changeCss('h6', 'font-size:' + parseInt(eval(eval(screenWidth * 3.5) / 100)) + 'px;');
-    
+
     changeCss('.divCollection', 'font-size:' + parseInt(eval(eval(screenWidth * 5) / 100)) + 'px; \n\
-                height: '+ parseInt(eval(eval(screenHeight * 25) / 100)) + 'px; line-height: '+ parseInt(eval(eval(screenHeight * 25) / 100)) + 'px;');
-    
+                height: ' + parseInt(eval(eval(screenHeight * 25) / 100)) + 'px; line-height: ' + parseInt(eval(eval(screenHeight * 25) / 100)) + 'px;');
+
     changeCss('.btn', 'font-size:' + fontSize + 'px;');
     changeCss('.navbar-brand', 'font-size:' + eval(fontSize / 2) + 'px;');
     changeCss('#divCallRecords', 'font-size:' + recordFontSize + 'px;');
@@ -17,7 +17,7 @@
     changeCss('#GridView1, #btnRefresh', 'font-size:' + eval(fontSize / 2.2) + 'px;');
     changeCss('.fa-check, .fa-check-circle, .fa-spinner, .fa-head', 'font-size:' + eval(20 * screenWidth / 360) + 'px;');
 
-    
+
 
     $('.lnkLogOut').click(function () {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -34,17 +34,147 @@
         $('#divLoading').removeClass('hide');
         getRecords();
     })
+
 })();
 
 function onLoad() {
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var output = (('' + day).length < 2 ? '0' : '') + day + '/' +
+            (('' + month).length < 2 ? '0' : '') + month + '/' +
+            d.getFullYear();
+    var dateToday = output;
+
+    var dateFormatted = (('' + month).length < 2 ? '0' : '') + month + '/' +
+            (('' + day).length < 2 ? '0' : '') + day + '/' +
+            d.getFullYear();
+
+    //dateFormatted = '01/16/2016';
+    $('.dateToday').text(dateToday);
+
+    setFirstTab(dateFormatted);
+    $('a[data-toggle="tab"]').on('click', function (e) {
+        var url = $(this).attr("href"); // the remote url for content
+        var target = $(this).data("target"); // the target pane
+        var tab = $(this); // this tab
+
+        var theTab = $(tab).attr('id');
+
+        $(target).load(url + dateFormatted, function (result) {
+
+            if (theTab === 'tab1') {
+                var returnHtml = $("#home").find("div:nth-child(4)").html();
+                var arrReturnHtml = returnHtml.split('<div>');
+
+                var morEveData = arrReturnHtml[0].trim();
+                var morEve = morEveData.split(' ');
+
+                var morningCollection = 0;
+                var eveningCollection = 0;
+                if (morEve[1] !== undefined) {
+                    morningCollection = parseInt(morEve[1]);
+                }
+                if (morEve[3] !== undefined) {
+                    eveningCollection = parseInt(morEve[3]);
+                }
+
+                var totalCollection = eval(morningCollection + eveningCollection);
+
+
+                console.log($("#home").find('#GridView1').html());
+
+                var gridData = $("#home").find('#GridView1').html();
+
+                $('#home').html('<table id="tblMilkCollection">\n\
+                <tr>\n\
+                    <td>\n\
+                        <div class="divCollection">' + morningCollection + '</div>\n\
+                    </td>\n\
+                    <td>\n\
+                        <div class="divCollection">' + eveningCollection + '</div>\n\
+                    </td>\n\
+                </tr>\n\
+            </table>\n\
+            \n\
+            <h4 style="text-align: center;">Total: ' + totalCollection + '</h4>');
+
+                var gridTable = '<table class="table table-bordered table-striped">' + gridData + '</table>';
+                $('#home').append(gridTable);
+            }
+            else if (theTab === 'tab2') {
+                var gridTable = '<table class="table table-bordered table-striped">' + $('#menu1').find('#GridView1').html() + '</table>';
+                $('#menu1').html(gridTable);
+            } else if (theTab === 'tab3') {
+                var gridTable = '<table class="table table-bordered table-striped">' + $('#menu2').find('#GridView1').html() + '</table>';
+                $('#menu2').html(gridTable);
+            }
+            tab.tab('show');
+        });
+
+    });
+
+    // initially activate the first tab..
+    $('#tab1').tab('show');
+
     if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
         document.addEventListener('deviceready', initApp, false);
     } else {
         initApp();
     }
+
 }
 
+function setFirstTab(dateFormatted) {
+    var $this = $('#tab1');
+    var url = $($this).attr("href"); // the remote url for content
+    var target = $($this).data("target"); // the target pane
+    var tab = $($this); // this tab
+    var theTab = $(tab).attr('id');
 
+    $(target).load(url + dateFormatted, function (result) {
+        if (theTab === 'tab1') {
+            var returnHtml = $("#home").find("div:nth-child(4)").html();
+            var arrReturnHtml = returnHtml.split('<div>');
+
+            var morEveData = arrReturnHtml[0].trim();
+            var morEve = morEveData.split(' ');
+
+            var morningCollection = 0;
+            var eveningCollection = 0;
+            if (morEve[1] !== undefined) {
+                morningCollection = parseInt(morEve[1]);
+            }
+            if (morEve[3] !== undefined) {
+                eveningCollection = parseInt(morEve[3]);
+            }
+
+            var totalCollection = eval(morningCollection + eveningCollection);
+
+
+            console.log($("#home").find('#GridView1').html());
+
+            var gridData = $("#home").find('#GridView1').html();
+
+            $('#home').html('<table id="tblMilkCollection">\n\
+                <tr>\n\
+                    <td>\n\
+                        <div class="divCollection">' + morningCollection + '</div>\n\
+                    </td>\n\
+                    <td>\n\
+                        <div class="divCollection">' + eveningCollection + '</div>\n\
+                    </td>\n\
+                </tr>\n\
+            </table>\n\
+            \n\
+            <h4 style="text-align: center;">Total: ' + totalCollection + '</h4>');
+
+            var gridTable = '<table class="table table-bordered table-striped">' + gridData + '</table>';
+            $('#home').append(gridTable);
+        }
+        tab.tab('show');
+    });
+}
 
 function changeCss(className, classValue) {
     // we need invisible container to store additional css definitions
