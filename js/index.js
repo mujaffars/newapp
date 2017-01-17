@@ -1,7 +1,7 @@
 var dateFormatted;
 
 (function () {
-    changeCss('body', 'font-size:' + parseInt(eval(eval(screenWidth * 4.7) / 100)) + 'px;');
+    changeCss('body', 'font-size:' + parseInt(eval(eval(screenWidth * 3.9) / 100)) + 'px;');
     changeCss('.navbarbrand', 'font-size:' + fontSize + 'px !important;');
     changeCss('h4', 'font-size:' + parseInt(eval(eval(screenWidth * 4) / 100)) + 'px;');
     changeCss('h3', 'font-size:' + fontSize + 'px;');
@@ -38,6 +38,8 @@ var dateFormatted;
     })
 
     $("#recordDate").datepicker({
+        changeMonth: true,
+        changeYear: true,
         onSelect: function (dateText) {
             console.log("Selected date: " + dateText + "; input's current value: " + this.value);
             dateFormatted = this.value;
@@ -210,6 +212,18 @@ function refreshTab() {
             <h4 style="text-align: center;">Total: ' + totalCollection + '</h4>');
 
             $('#home').append(gridTable);
+        } else if (theTab === 'tab2') {
+            var gridTable = '<h4>Details not found</h4>';
+            if ($('#menu1').find('#GridView1').length) {
+                gridTable = '<table class="table table-bordered table-striped">' + $('#menu1').find('#GridView1').html() + '</table>';
+            }
+            $('#menu1').html(gridTable);
+        } else if (theTab === 'tab3') {
+            var gridTable = '<h4>Details not found</h4>';
+            if ($('#menu2').find('#GridView1').length) {
+                gridTable = '<table class="table table-bordered table-striped">' + $('#menu2').find('#GridView1').html() + '</table>';
+            }
+            $('#menu2').html(gridTable);
         }
         tab.tab('show');
     });
