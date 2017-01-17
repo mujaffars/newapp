@@ -1,3 +1,5 @@
+var dateFormatted;
+
 (function () {
     changeCss('body', 'font-size:' + parseInt(eval(eval(screenWidth * 4.7) / 100)) + 'px;');
     changeCss('.navbarbrand', 'font-size:' + fontSize + 'px !important;');
@@ -35,6 +37,14 @@
         getRecords();
     })
 
+    $("#recordDate").datepicker({
+        onSelect: function (dateText) {
+            console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+            dateFormatted = this.value;
+            refreshTab();
+        }
+    });
+
 })();
 
 function onLoad() {
@@ -46,20 +56,28 @@ function onLoad() {
             d.getFullYear();
     var dateToday = output;
 
-    var dateFormatted = (('' + month).length < 2 ? '0' : '') + month + '/' +
+    dateFormatted = (('' + month).length < 2 ? '0' : '') + month + '/' +
             (('' + day).length < 2 ? '0' : '') + day + '/' +
             d.getFullYear();
 
     //dateFormatted = '01/16/2016';
-    $('.dateToday').text(dateToday);
+    //$('.dateToday').text(dateToday);
+    $('#recordDate').val(dateFormatted);
 
-    setFirstTab(dateFormatted);
     $('a[data-toggle="tab"]').on('click', function (e) {
         var url = $(this).attr("href"); // the remote url for content
         var target = $(this).data("target"); // the target pane
         var tab = $(this); // this tab
 
         var theTab = $(tab).attr('id');
+
+        if (theTab === 'tab1') {
+            $('#home').html('<h4>Loading ...</h4>')
+        } else if (theTab === 'tab2') {
+            $('#menu1').html('<h4>Loading ...</h4>')
+        } else if (theTab === 'tab3') {
+            $('#menu2').html('<h4>Loading ...</h4>')
+        }
 
         $(target).load(url + dateFormatted, function (result) {
 
@@ -72,19 +90,21 @@ function onLoad() {
 
                 var morningCollection = 0;
                 var eveningCollection = 0;
-                if (morEve[1] !== undefined) {
+                if (morEve[1] !== undefined && morEve[1].trim() !== '') {
                     morningCollection = parseInt(morEve[1]);
                 }
                 if (morEve[3] !== undefined) {
                     eveningCollection = parseInt(morEve[3]);
                 }
-
+                if (isNaN(morningCollection)) {
+                    morningCollection = 0;
+                }
                 var totalCollection = eval(morningCollection + eveningCollection);
 
-
-                console.log($("#home").find('#GridView1').html());
-
-                var gridData = $("#home").find('#GridView1').html();
+                var gridTable = '<h4>Details not found</h4>';
+                if ($('#home').find('#GridView1').length) {
+                    gridTable = '<table class="table table-bordered table-striped">' + $('#home').find('#GridView1').html() + '</table>';
+                }
 
                 $('#home').html('<table id="tblMilkCollection">\n\
                 <tr>\n\
@@ -99,14 +119,19 @@ function onLoad() {
             \n\
             <h4 style="text-align: center;">Total: ' + totalCollection + '</h4>');
 
-                var gridTable = '<table class="table table-bordered table-striped">' + gridData + '</table>';
                 $('#home').append(gridTable);
             }
             else if (theTab === 'tab2') {
-                var gridTable = '<table class="table table-bordered table-striped">' + $('#menu1').find('#GridView1').html() + '</table>';
+                var gridTable = '<h4>Details not found</h4>';
+                if ($('#menu1').find('#GridView1').length) {
+                    gridTable = '<table class="table table-bordered table-striped">' + $('#menu1').find('#GridView1').html() + '</table>';
+                }
                 $('#menu1').html(gridTable);
             } else if (theTab === 'tab3') {
-                var gridTable = '<table class="table table-bordered table-striped">' + $('#menu2').find('#GridView1').html() + '</table>';
+                var gridTable = '<h4>Details not found</h4>';
+                if ($('#menu2').find('#GridView1').length) {
+                    gridTable = '<table class="table table-bordered table-striped">' + $('#menu2').find('#GridView1').html() + '</table>';
+                }
                 $('#menu2').html(gridTable);
             }
             tab.tab('show');
@@ -117,20 +142,31 @@ function onLoad() {
     // initially activate the first tab..
     $('#tab1').tab('show');
 
-    if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
-        document.addEventListener('deviceready', initApp, false);
-    } else {
-        initApp();
-    }
+    refreshTab();
 
 }
 
-function setFirstTab(dateFormatted) {
-    var $this = $('#tab1');
+function refreshTab() {
+    var $this;
+
+    $('.nav-tabs').find('li').each(function () {
+        if ($(this).hasClass('active')) {
+            $this = $(this).find('a');
+        }
+    })
+
     var url = $($this).attr("href"); // the remote url for content
     var target = $($this).data("target"); // the target pane
     var tab = $($this); // this tab
     var theTab = $(tab).attr('id');
+
+    if (theTab === 'tab1') {
+        $('#home').html('<h4>Loading ...</h4>')
+    } else if (theTab === 'tab2') {
+        $('#menu1').html('<h4>Loading ...</h4>')
+    } else if (theTab === 'tab3') {
+        $('#menu2').html('<h4>Loading ...</h4>')
+    }
 
     $(target).load(url + dateFormatted, function (result) {
         if (theTab === 'tab1') {
@@ -148,14 +184,18 @@ function setFirstTab(dateFormatted) {
             if (morEve[3] !== undefined) {
                 eveningCollection = parseInt(morEve[3]);
             }
-
+            if (isNaN(morningCollection)) {
+                morningCollection = 0;
+            }
             var totalCollection = eval(morningCollection + eveningCollection);
 
 
             console.log($("#home").find('#GridView1').html());
 
-            var gridData = $("#home").find('#GridView1').html();
-
+            var gridTable = '<h4>Details not found</h4>';
+            if ($('#home').find('#GridView1').length) {
+                gridTable = '<table class="table table-bordered table-striped">' + $('#home').find('#GridView1').html() + '</table>';
+            }
             $('#home').html('<table id="tblMilkCollection">\n\
                 <tr>\n\
                     <td>\n\
@@ -169,7 +209,6 @@ function setFirstTab(dateFormatted) {
             \n\
             <h4 style="text-align: center;">Total: ' + totalCollection + '</h4>');
 
-            var gridTable = '<table class="table table-bordered table-striped">' + gridData + '</table>';
             $('#home').append(gridTable);
         }
         tab.tab('show');
